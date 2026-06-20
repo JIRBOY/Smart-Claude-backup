@@ -1,11 +1,4 @@
-# Test artifacts
-test_*/
-falcon_test/
-integrated_test/
-
-# Original model zips (not needed in repo)
-PHP73K_*.zip
-
 # OS files
 .DS_Store
 Thumbs.db
+desktop.ini
