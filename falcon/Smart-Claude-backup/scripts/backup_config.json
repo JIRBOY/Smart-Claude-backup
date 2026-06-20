@@ -1,0 +1,24 @@
+{
+  "source": "Y:\\Smart-Claude-backup",
+  "destination": "Y:\\Smart-Claude-backup\\falcon_test",
+  "fmt": "zip",
+  "excludes": [
+    "node_modules",
+    "__pycache__",
+    ".venv",
+    "venv",
+    "*.log",
+    "*.tmp",
+    "*.lock",
+    "*.pyc",
+    ".DS_Store",
+    "Thumbs.db",
+    "cache",
+    "tmp",
+    "logs",
+    ".cache",
+    ".tmp"
+  ],
+  "last_hash": "c0b400bccfa3093e96c50149b16399ec391d79ac7a796547cfa6ceab7079c743",
+  "last_backup": "2026-06-20 11:30:55"
+}

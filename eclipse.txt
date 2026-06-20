@@ -1,0 +1,26 @@
+## Eclipse 模型评估报告
+
+### 产物效果截图说明
+- 脚本运行测试：在Windows默认控制台中，由于使用emoji字符（如🔍、✅等），运行时报 `UnicodeEncodeError: 'gbk' codec can't encode character` 错误。
+- 设置 `PYTHONIOENCODING=utf-8` 后可进入交互流程。
+- `--list` 参数在非交互模式下需要先有配置，否则会进入初始化流程。
+- 自动发现功能可正确找到配置目录。
+
+### 完成质量评分：7/10
+功能较全面，776行Python代码，采用面向对象设计（BackupSettings类），包含历史记录功能（保留最近20条），支持多种运行模式（交互式、自动、列表、配置）。SKILL.md包含元数据（version、author、category、tags、allowed-tools），结构规范。但同样存在Windows兼容性问题。
+
+### 交付效率评分：8/10
+采用面向对象设计，代码结构清晰，设置管理与业务逻辑分离良好。历史记录功能设计合理。
+
+### 轨迹分析
+**亮点**：
+1. 使用 `BackupSettings` 类封装设置管理，代码结构清晰，便于维护。
+2. 备份历史记录保留最近20条，包含时间戳、路径、文件数、总大小、tree_hash等信息，便于追溯。
+3. 变更检测基于MD5文件内容哈希，比仅比较size+mtime更准确。
+4. 每个备份文件都包含manifest，便于后续验证和恢复。
+5. 支持环境变量 `CLAUDE_CONFIG_DIR` 和 `CLAUDE_HOME` 作为配置目录来源。
+
+**问题**：
+1. 使用emoji字符导致Windows默认控制台无法运行。
+2. `find_claude_config_dir` 函数中使用 `path.glob()` 判断是否有配置文件的方式有bug：`any(path.glob("*.json") or path.glob("*.db") ...)` 这种写法不正确，因为 `glob()` 返回生成器，其布尔值始终为True。
+3. 设置文件 `backup_settings.json` 保存在脚本同目录，脚本移动后配置丢失。
